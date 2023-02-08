@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Profile{% endblock %}
+{% block body %}
+    <section class="" style="background-color: rgb(228, 228, 228);">
+        {% include 'navbar.html' %}
+        <div class="container p-2 m-2 d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-bottom">
+                <div class="card">
+                    <img src="{{main_user_profile.profileimg.url}}" alt="" height="200px" width="200px">
+                </div>
+                <h3 class="p-3">{{user_object.username}}</h3>
+            </div>
+                <div class="d-flex">
+                    <h3>{{user_followers}} Follower</h3>
+                    <h3>{{user_following}} Following</h3>
+                    {% if user_object.username == request.user.username %}
+                    <a href="{% url 'settings' %}" class="btn btn-success">Settings</a>
+                    {% else %}
+                    <a href="{% url 'follow' user_object.username %}" class="btn btn-success">{{button_text}}</a>
+                    {% endif %}
+                </div>
+        </div>
+        <div class="">
+            <div class="container w-50">
+                {% for post in user_posts %}
+                <div class="card p-3 m-2">
+                    <span class="pb-2 pt-2"><img src="{{main_user_profile.profileimg.url}}" class="rounded-circle me-3" height="30px" width="30px" alt=""><b><a href="{% url 'profile' post.user %}">{{post.user}}</a></b></span>
+                    <h3>{{post.caption}}</h3>
+                    <img src="{{post.image.url}}" alt="">
+                    <div class="row mt-2">
+                        <div class="col-6">
+                            <a href="/like-post?post_id={{post.id}}">
+                                <i class="fa-regular fa-thumbs-up fs-3"></i>
+                            </a>{{post.no_of_likes}} Likes
+                        </div>
+                        <div class="col-6">
+                            <i class="fa-regular fa-comment fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

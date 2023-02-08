@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Settings{% endblock %}
+{% block body %}
+    <section class="" style="background-color: rgb(228, 228, 228);">
+        {% include 'navbar.html' %}
+        <div class="text-center p-2 m-2 row">
+            <h3>Account Settings</h3>
+            <div class="col-3"></div>
+            <div class="m-2 p-5 text-center shadow bg-light col-6">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <img src="{{user_profile.profileimg.url}}" alt="" style="width: 150px;" class="p-2 m-2">
+                    <input type="file" name="image" id="" class="form-control p-2 m-2">
+                    <textarea rows="5" type="text" name="bio" id="" class="form-control p-2 m-2" value="{{user_profile.bio}}" placeholder="Bio">{{user_profile.bio}}</textarea>
+                    <input type="text" name="location" id="" class="form-control p-2 m-2" value="{{user_profile.location}}" placeholder="Location">
+                    <input type="submit" value="Save" class="btn btn-success p-2 m-2">
+                </form>
+            </div>
+            <div class="col-3"></div>
+        </div>
+    </section>
+{% endblock %}

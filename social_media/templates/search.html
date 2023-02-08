@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Search{% endblock %}
+{% block body %}
+    <section class="" style="background-color: rgb(228, 228, 228);" >
+        {% include 'navbar.html' %}
+        <div class="row m-2">
+            <div class="col-4">
+
+            </div>
+            <div class="col-4">
+                <div class="card p-3 m-2 d-flex flex-row align-items-center">
+                    {% for profile in username_profile_list %}
+                        <img src="{{profile.profileimg.url}}" alt="" height="40px" width="40px" class="rounded-circle">
+                        <h4 class="ms-2"><a href="{% url 'profile' profile.user.username %}" class="nav-link">{{profile.user.username}}</h4>    
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-4">
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Sign Up{% endblock %}
+{% block body %}
+    <div class="d-flex p-2 justify-content-center align-items-center text-center" style="height: 100vh;">
+        <form action="" method="POST" class="w-50">
+            {% csrf_token %}
+            <h1 class="text-center p-2">Sign Up</h1>
+            {% if messages %}
+                {% for message in messages %}
+                <h4 class="text-danger">{{message}}</h4>
+                {% endfor %}
+            {% endif %}
+            <input type="text" name="username" id="" placeholder="Username" class="form-control mb-2">
+            <input type="email" name="email" id="" placeholder="Email" class="form-control mb-2">
+            <input type="password" name="password" id="" placeholder="Password" class="form-control mb-2">
+            <input type="password" name="password2" id="" placeholder="Password(Confirmation)" class="form-control mb-2">
+            <input type="submit" value="Sign Up" class="btn btn-success mb-2">
+            <h5>Already have an account? <a href="{% url 'signin' %}">Sign in</a></h5>
+        </form>
+    </div>
+{% endblock %}

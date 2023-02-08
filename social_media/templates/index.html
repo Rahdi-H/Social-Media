@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block body %}
+    <section class="" style="background-color: rgb(228, 228, 228);">
+        {% include 'navbar.html' %}
+        <div class="row m-2 p-2">
+            <div class="col-3">
+
+            </div>
+            <div class="col-6">
+                {% for post in posts %}
+                <div class="card p-3 m-2">
+                    <span class="pb-2 pt-2"><b><a href="{% url 'profile' post.user %}" class="nav-link">@{{post.user}}</a></b></span>
+                    <h3>{{post.caption}}</h3>
+                    <img src="{{post.image.url}}" alt="">
+                    <div class="row mt-2">
+                        <div class="col-4">
+                            <a href="/like-post?post_id={{post.id}}" class="nav-link">
+                                <i class="fa-regular fa-thumbs-up fs-3"></i>
+                            </a>{{post.no_of_likes}} Likes
+                        </div>
+                        <div class="col-4">
+                            <i class="fa-regular fa-comment fs-3 nav-link"></i>
+                        </div>
+                        <div class="col-4">
+                            <a href="{{post.image.url}}" download class="nav-link"><i class="fa-solid fa-download fs-3"></i></a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col-3">
+                <div class="card p-2 m-2 d-flex">
+                    <h3 class="p-2 mb-2 text-center">User suggestions</h3>
+                  {% for fol in profile_list %}
+                    <div class="user d-flex justify-content-between mb-2">
+                        <img src="{{fol.profileimg.url}}" alt="" class="rounded-circle" height="30px" width="30px">
+                        <h4>{{fol.user}}</h4>
+                        <a href="{% url 'profile' fol.user.username %}" class="btn btn-outline-success">Visit User</a>
+                    </div>
+                  {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
